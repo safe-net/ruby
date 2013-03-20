@@ -127,9 +127,9 @@ class PubnubRequest
       my_cipher_key = options[:cipher_key] || self_cipher_key
 
       if my_cipher_key.present?
-        self.message = Yajl.dump(aes_encrypt(my_cipher_key, options, self))
+        self.message = JSON.dump(aes_encrypt(my_cipher_key, options, self))
       else
-        self.message = Yajl.dump(options[:message])
+        self.message = JSON.dump(options[:message])
       end
     end
   end
@@ -159,7 +159,7 @@ class PubnubRequest
   end
 
   def package_response!(response_data)
-    self.response = response_data.respond_to?(:content) ? Yajl.load(response_data.content) : Yajl.load(response_data)
+    self.response = response_data.respond_to?(:content) ? JSON.load(response_data.content) : JSON.load(response_data)
     self.last_timetoken = self.timetoken
     self.timetoken = self.response[1] unless self.operation == "time"
 
@@ -190,7 +190,7 @@ class PubnubRequest
       if %w(publish subscribe).include?(@operation)
         self.response[0] = myarr
       elsif @operation == "detailed_history"
-        json_response_data = Yajl.load(response_data)
+        json_response_data = JSON.load(response_data)
         self.response = [myarr, json_response_data[1], json_response_data[2]]
       else
         self.response = myarr

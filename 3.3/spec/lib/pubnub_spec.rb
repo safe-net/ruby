@@ -536,7 +536,7 @@ describe Pubnub do
         message = "Pubnub Messaging API 1"
         encrypted_message = PubnubCrypto.new(@my_cipher_key).encrypt(message)
 
-        mock_publish_request = PubnubRequest.new(:callback => @my_callback, :channel => @my_channel, :message => Yajl.dump(encrypted_message),
+        mock_publish_request = PubnubRequest.new(:callback => @my_callback, :channel => @my_channel, :message => JSON.dump(encrypted_message),
                                                  :operation => :publish, :publish_key => @my_pub_key, :subscribe_key => @my_sub_key,
                                                  :cipher_key => @my_cipher_key, :ssl => false, :port => 80,
                                                  :url => "http://pubsub.pubnub.com/publish/demo_pub_key/demo_sub_key/0/demo_channel/0/%22f42pIQcWZ9zbTbH8cyLwByD%2FGsviOE0vcREIEVPARR0%3D%22",

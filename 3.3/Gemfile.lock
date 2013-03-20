@@ -154,6 +154,7 @@ PLATFORMS
 DEPENDENCIES
   em-http-request
   httparty
+  json
   linecache19
   passenger
   pubnub (= 3.3.0.6)

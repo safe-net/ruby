@@ -1,5 +1,9 @@
 class PubnubCrypto
-  require 'yajl'
+  begin
+    require 'yajl/json_gem'
+  rescue
+    require 'json'
+  end
 
   def initialize(cipher_key)
     @alg = "AES-256-CBC"
@@ -21,7 +25,7 @@ class PubnubCrypto
     aes.key = @key
     aes.iv = @iv
 
-    json_message = Yajl.dump(message)
+    json_message = JSON.dump(message)
     cipher = aes.update(json_message)
     cipher << aes.final
 
@@ -48,6 +52,6 @@ class PubnubCrypto
 
     end
 
-    return Yajl.load(plain_text)
+    return JSON.load(plain_text)
   end
 end

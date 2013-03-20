@@ -10,7 +10,8 @@ gem 'sqlite3'
 #gem 'eventmachine', "~> 0.12.9"
 gem 'em-http-request'
 gem "uuid", "~> 2.3.5"
-gem 'yajl-ruby'
+gem 'yajl-ruby', :platforms => :ruby
+gem 'json', :platforms => :jruby
 gem 'pubnub', "3.3.0.6"
 gem 'linecache19'
 gem 'ruby_core_source'
